@@ -1,0 +1,29 @@
+1. Arquitectura y Patrones (Tu prioridad)Ya conoces MVC, ahora debes dominar cómo estructurar el código para que sea escalable.
+
+    Arquitectura de Capas (Layered Architecture): Separar controladores, servicios (lógica de negocio) y repositorios (acceso a datos).
+
+    Principios SOLID: Cinco reglas de diseño orientado a objetos para crear código fácil de mantener y probar.
+
+    Inyección de Dependencias: Técnica para desacoplar las clases y hacer el código modular.
+
+2. Diseño y Creación de APIsLas APIs son los puentes que permiten al Backend comunicarse con aplicaciones móviles, web o con otros servidores.
+
+    REST APIs: Domina los métodos HTTP (GET, POST, PUT, DELETE), códigos de estado (200, 404, 500) y el diseño de URLs limpias.Autenticación y Autorización: Implementa seguridad usando JWT (JSON Web Tokens) o sesiones para controlar quién accede a qué.
+
+    Validación de Datos: Reglas estrictas para revisar y limpiar los datos que envían los usuarios antes de procesarlos.
+
+3. Gestión y Modelado de Bases de DatosUn backend pasa gran parte de su tiempo interactuando con datos. No basta con saber hacer consultas básicas.
+
+    Bases de Datos Relacionales (SQL): Elige PostgreSQL o MySQL. Aprende diseño de esquemas, relaciones (uno a muchos, muchos a muchos) y normalización.
+
+    ORMs (Object-Relational Mapping): Herramientas como Sequelize, Prisma o Hibernate que te permiten interactuar con la base de datos usando tu lenguaje de programación.
+
+    Optimización: Aprende a usar Índices para acelerar las consultas cuando la base de datos sea gigantesca.
+
+4. Infraestructura y DespliegueUn backend debe saber cómo vive y corre su aplicación en el mundo real.
+
+    Docker y Contenedores: Tema obligatorio. Permite empaquetar tu aplicación con todas sus dependencias para que corra igual en cualquier computadora.
+
+    Manejo de Errores y Logs: Estructurar sistemas de alertas para saber exactamente qué falló en el servidor cuando un usuario experimenta un error.
+
+    Conceptos de Redes: Entender cómo funcionan las peticiones HTTP/HTTPS, DNS y los servidores web (como Nginx).
