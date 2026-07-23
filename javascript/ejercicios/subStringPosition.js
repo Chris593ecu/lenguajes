@@ -1,4 +1,4 @@
-// Para encontrar una subcadena dentro de otra cadena usamos indexOf()
+// Para encontrar una subcadena dentro de otra cadena usamos indexOf(), nos muestra la posición exacta donde se encuentra. Es mas usado includes() el cuál muestra un boleano de respuesta
 
 let sentence = 'Hello World';
 let position = sentence.indexOf('World');
@@ -43,9 +43,9 @@ if (email.indexOf('@') !== -1) {
 } else {
     console.log('no se ha ingresado el @');
 }
-// sin embargo es mejor usar includes()
+// sin embargo es mejor usar includes() y es case sensitive
 
-let mensaje = email.includes('@')
+let mensaje = email.includes('@', 1) //1 es opcional, es el índice a partir del cual se va a contar
     ? 'El correo es correcto'
     : 'El correo no es correcto';
 
