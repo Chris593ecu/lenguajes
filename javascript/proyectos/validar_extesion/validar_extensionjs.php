@@ -18,25 +18,46 @@
         <h1>Ingrese su archivo al sistema</h1>
     </div>
     <div class="container">
-        <p>Suba al sistema un archivo .pdf</p>
+        <hr>
         <form action="" class="form-control">
-            <label for="input" class="form-label">suba su archivo aquí:</label> <br>
+            <label for="input" class="form-label">Ingrese un su archivo pdf aquí:</label> <br>
             <input id="input" type="file" class="form-control"> <br>
-            <button id="validar" type="submit" class="btn btn-primary disabled">Enviar</button>
+            <button id="validar" type="submit" class="btn btn-primary disabled" disabled>Enviar</button>
         </form>
     </div>
 
-    <!-- <script src="<?= BASE_URL ?>scripts/cupones.js?v=<?= filemtime(BASE_PATH . 'scripts/cupones.js') ?>"> -->
+    <div class="container">
+        <hr>
+        <form action="" class="form-control">
+            <label for="inputImg" class="form-label">Ingrese un su archivo imagen aquí:</label> <br>
+            <input id="inputImg" type="file" class="form-control"> <br>
+            <button id="validarImg" type="submit" class="btn btn-primary disabled" disabled>Enviar</button>
+        </form>
+    </div>
 
-    </script>
-    <script src="<?= BASE_URL ?>javascript/proyectos/validar_extesion/validator.js?v=<?= filemtime(BASE_PATH . 'javascript/proyectos/validar_extesion/validator.js') ?>">
 
-    </script>
+    <!-- <script src="<?= BASE_URL ?>javascript/proyectos/validar_extesion/validator.js?v=<?= filemtime(BASE_PATH . 'javascript/proyectos/validar_extesion/validator.js') ?></script> -->
+
+
+    <script src="<?= BASE_URL ?>javascript/proyectos/validar_extesion/validatorPOO.js?v=<?= filemtime(BASE_PATH . 'javascript/proyectos/validar_extesion/validatorPOO.js') ?>"></script>
     <?php
     require_once BASE_PATH . 'frameworks/bootstrapjs.php'
     ?>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Instanciamos el validador
+            const pdfValidator = new FileValidator(['pdf']);
 
+            // 2. Instanciamos la interfaz pasando los IDs del HTML y el validador
+            new FileUploadUI('input', 'validar', pdfValidator);
+
+            // para imágenes
+            const imgValidator = new FileValidator(['img', 'jpg', 'png', ]);
+
+            new FileUploadUI('inputImg', 'validarImg', imgValidator);
+        });
+    </script>
 </body>
 
 </html>
