@@ -1,5 +1,5 @@
 const persona = {
-    apellido: 'Juan',
+    apellido: 'Torres',
 };
 persona.nombre = 'Chris';
 
