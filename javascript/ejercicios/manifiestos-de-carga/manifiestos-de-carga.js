@@ -1,10 +1,10 @@
-const producto = {
-    containerId: 1,
-    destination: 'Monterey, California, USA',
-    weight: 831,
-    unit: 'lb',
-    hazmat: false,
-};
+// const producto = {
+//     containerId: 1,
+//     destination: 'Monterey, California, USA',
+//     weight: 831,
+//     unit: 'lb',
+//     hazmat: false,
+// };
 
 function normalizeUnits(manifest) {
     const copyManifest = { ...manifest };
@@ -16,62 +16,68 @@ function normalizeUnits(manifest) {
 
     return copyManifest;
 }
-normalizeUnits(
-    normalizeUnits({
-        containerId: 68,
-        destination: 'Salinas',
-        weight: 101,
-        unit: 'lb',
-        hazmat: true,
-    })
-);
+// normalizeUnits(
+//     normalizeUnits({
+//         containerId: 68,
+//         destination: 'Salinas',
+//         weight: 101,
+//         unit: 'lb',
+//         hazmat: true,
+//     })
+// );
 
 function validateManifest(manifest) {
-    const errors = {};
     const copyManifest = { ...manifest };
+    // if (copyManifest !== undefined && copyManifest !== null) {
+    //     new Object();
+    // }
+    const errors = {};
 
-    for (const key in copyManifest) {
-        if (copyManifest[key] !== undefined || copyManifest[key] !== null) {
-            return new Object();
+    //reglas
+
+    const reglas = {
+        containerId: (v) =>
+            typeof v === 'number' && v > 0 && Number.isInteger(v),
+        destination: (v) => typeof v === 'string' && v.trim() !== '',
+        weight: (v) => typeof v === 'number' && v > 0 && !Number.isNaN(v),
+        unit: (v) => v === 'kg' || v === 'lb',
+        hazmat: (v) => typeof v === 'boolean',
+    };
+
+    for (const [campo, v] of Object.entries(reglas)) {
+        const valor = copyManifest[campo];
+
+        // console.log(`campo data: ${campo} / valor data: ${valor}`);
+
+        if (valor === undefined) {
+            errors[campo] = 'Missing';
+        } else if (valor === null || !v(valor)) {
+            errors[campo] = 'Invalid';
         }
     }
+    return errors;
+}
 
-    if (
-        typeof copyManifest.containerId !== 'number' ||
-        copyManifest.containerId <= 0 ||
-        !Number.isInteger(copyManifest.containerId)
-    ) {
-        copyManifest.containerId = 'Invalid';
-    } else if ((copyManifest.containerId = '')) {
-        copyManifest.containerId = 'Missing';
-    }
+function processManifest(manifest) {
+    const validation = validateManifest(manifest);
 
-    if (
-        typeof copyManifest.destination !== 'string' ||
-        copyManifest.destination.trim === ''
-    ) {
-        copyManifest.destination = 'Invalid';
-    } else if ((copyManifest.destination = '')) {
-        copyManifest.destination = 'Missing';
-    }
+    if (Object.keys(validation).length === 0) {
+        const normalize = normalizeUnits(manifest);
 
-    if (copyManifest.weight !== 'number' || copyManifest.weight <= 0) {
-        copyManifest.weight = 'Invalid';
-    } else if (copyManifest.weight === '') {
-        copyManifest.weight = 'Missing';
-    }
-
-    if (copyManifest.unit !== 'kg' || copyManifest.unit !== 'lb') {
-        copyManifest.unit = 'Invalid';
-    } else if (copyManifest.unit === '') {
-        copyManifest.unit = 'Missing';
-    }
-
-    if (copyManifest.hazmat !== 'boolean') {
-        copyManifest.hazmat = 'Invalid';
-    } else if (copyManifest.hazmat === '') {
-        copyManifest.hazmat = 'Missing';
+        console.log(`Validation success: ${manifest.containerId}`);
+        console.log(`Total weight: ${normalize.weight} kg`);
+    } else {
+        console.log(`Validation error: ${manifest.containerId}`);
+        console.log(validation);
     }
 }
 
-function processManifest() {}
+// let a = {
+//     containerId: 55,
+//     destination: 'Carmel',
+//     weight: 400,
+//     unit: 'lb',
+//     hazmat: false,
+// };
+
+// processManifest(a);
