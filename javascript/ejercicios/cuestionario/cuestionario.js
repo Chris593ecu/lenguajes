@@ -41,12 +41,11 @@ function getRandomQuestion(objectQuestion) {
     let questionX = objectQuestion[indiceQuestions];
     return questionX;
 }
-getRandomQuestion(questions);
-// console.log(questionX);
+console.log(getRandomQuestion(questions));
 
-questionX =
-    getRandomQuestion(questions) ??
-    'No se obtuvo ninguna pregunta, siga intentando';
+// questionX =
+//     getRandomQuestion(questions) ??
+//     'No se obtuvo ninguna pregunta, siga intentando';
 
 function getRandomComputerChoice(choices) {
     let size = choices.length;
