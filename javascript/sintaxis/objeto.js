@@ -205,3 +205,17 @@ let ages = 25;
 let persons = { name, age };
 
 console.log(persons); // { names: "Bob", ages: 25 }
+
+// calcular tamaño de un objeto
+
+const myObject = {
+    name: 'Chris',
+    age: 33,
+    hobbies: ['Futbol', 'js', 'read', 'write'],
+};
+
+const sizeObject = Object.keys(myObject).length; // 3
+
+// calcular el tamaño de un array en un objeto
+
+const sizeArrayOnObject = myObject.hobbies.length; // 4
