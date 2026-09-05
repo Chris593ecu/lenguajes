@@ -41,7 +41,7 @@ function fearNotLetter(value) {
     //         console.log(abecedario[i]);
     //         const index = abecedario.indexOf(abecedario[i]);
     //         console.log(index);
-    //         valueArray.splice(index, 1, abecedario[i]);
+    //         valueArray.splice(index, 0, abecedario[i]);
     //         console.log(valueArray);
     //         continue;
     //         for (let j = 0; j < value.length; j++) {}
