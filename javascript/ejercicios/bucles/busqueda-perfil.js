@@ -26,6 +26,23 @@ let contacts = [
 ];
 
 function lookUpProfile(item, prop) {
+    const readContacts = [...contacts];
+    console.log(readContacts);
+
+    for (let i = 0; i < readContacts.length; i++) {
+        if (readContacts[i].firstName === item) {
+            // console.log(readContacts[i]);
+            if (contacts[i].hasOwnProperty(prop)) {
+                return contacts[i][prop];
+            } else {
+                return 'No such property';
+            }
+        }
+    }
+    return 'No such contact';
+
+    // superar la capacidad de ocupantes permitidos
+
     // const propierties = [];
     // const itemValue = 0;
     // for (const key of contacts) {
