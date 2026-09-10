@@ -25,28 +25,103 @@ const rawData = [
     'E54|Peppers|-1|2027-01-01|fridge',
 ];
 let rawDataFormat = [];
+console.log(rawData[0].split('|'));
+console.log(rawData.length);
 
+const shipment = [];
 function parseShipment(rawData) {
-    rawData.unshift('sku|name|qty|expires|zone');
-    console.log(rawData);
+    const noRepeat = [];
     for (let i = 0; i < rawData.length; i++) {
-        console.log(rawData[i].split('|'));
-        rawDataFormat.push(rawData[i].split('|'));
+        // console.log(rawData[i].split('|'));
+        const [sku, name, qty, expires, zone] = rawData[i].split('|');
+        if (!noRepeat.includes(sku)) {
+            noRepeat.push(sku);
 
-        console.log(rawDataFormat);
+            const myObject = {
+                sku: sku,
+                name: name,
+                qty: Number(qty),
+                expires: expires,
+                zone: zone || 'general',
+            };
+            shipment.push(myObject);
+        }
     }
-    console.log(Object.assign({}, rawDataFormat));
-    let myObjectArray = [];
+    // console.log(response);
 
-    console.log(rawDataFormat);
-    console.log(rawDataFormat[1]);
-
-    for (let i = 0; i < rawDataFormat.length; i++) {
-        console.log(rawDataFormat[i]);
-
-        myObjectArray.push(Object.assign({}, rawDataFormat[i]));
-    }
-    console.log(myObjectArray);
+    return shipment;
 }
 
 parseShipment(rawData);
+
+function planRestock(pantry, shipment) {
+    const actions = [];
+    for (let i = 0; i < shipment.length; i++) {
+        const item = shipment[i];
+        if (item.qty <= 0) {
+            actions.push({
+                type: 'discard',
+                item: item,
+            });
+            continue;
+        }
+        const existeEnDespensa = pantry.some((pItem) => pItem.sku === item.sku);
+        if (existeEnDespensa) {
+            actions.push({
+                type: 'restock',
+                item: item,
+            });
+        } else {
+            actions.push({
+                type: 'donate',
+                item: item,
+            });
+        }
+    }
+    console.log(actions);
+    return actions;
+}
+
+planRestock(pantry, shipment);
+
+console.log('script para Pichincha miles');
+/*
+window.sumarMillas = async function (cantidad = 1000) {
+    // Busca el botón con el aria-label exacto del HTML
+    const boton = document.querySelector(
+        'button[aria-label="Aumentar undefined"]'
+    );
+
+    if (!boton) {
+        console.error('❌ No se encontró el botón de aumentar.');
+        return;
+    }
+
+    console.log(`🚀 Iniciando ${cantidad} clics...`);
+
+    for (let i = 1; i <= cantidad; i++) {
+        // Genera un evento de clic nativo completo para React
+        const clickEvent = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window,
+        });
+
+        boton.dispatchEvent(clickEvent);
+
+        // Muestra avance cada 100 clics en la consola
+        if (i % 100 === 0) {
+            console.log(`⏳ Clics ejecutados: ${i} / ${cantidad}`);
+        }
+
+        // Pequeña pausa de 10ms para asegurar que React actualice el estado
+        await new Promise((resolve) => setTimeout(resolve, 10));
+    }
+
+    console.log('✅ ¡Proceso finalizado con éxito!');
+};
+
+// Ejecutar por defecto 1000 clics
+sumarMillas(1000);
+
+*/
