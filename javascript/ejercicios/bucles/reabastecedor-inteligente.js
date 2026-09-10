@@ -25,11 +25,9 @@ const rawData = [
     'E54|Peppers|-1|2027-01-01|fridge',
 ];
 let rawDataFormat = [];
-console.log(rawData[0].split('|'));
-console.log(rawData.length);
 
-const shipment = [];
 function parseShipment(rawData) {
+    const shipment = [];
     const noRepeat = [];
     for (let i = 0; i < rawData.length; i++) {
         // console.log(rawData[i].split('|'));
@@ -54,8 +52,8 @@ function parseShipment(rawData) {
 
 parseShipment(rawData);
 
-const actions = [];
 function planRestock(pantry, shipment) {
+    const actions = [];
     for (let i = 0; i < shipment.length; i++) {
         const item = shipment[i];
         console.log(item);
@@ -83,32 +81,51 @@ function planRestock(pantry, shipment) {
     return actions;
 }
 
-planRestock(pantry, shipment);
-console.log(planRestock(pantry, shipment));
-console.log(shipment[1].zone);
-
-console.log(actions);
 function groupByZone(actions) {
-    const clonePantry = [];
-    /** forma del objeto resultado:
-     * @key 'nombre de la zona
-     * @value Array(actions) que pertenecen a la zona
+    /**
+     * pantry es depensa
+     * fridge es nevera
      */
+
+    const clonePantry = {};
+    //debemos recorrer actions y buscar las zona a la que pertenecen
     for (let i = 0; i < actions.length; i++) {
-        console.log(actions[i].item.zone);
-        if (actions[i].item.zone === 'fridge') {
-            clonePantry.push( {
-                item.fridge : [...],
-            })
-        } else if (actions[i].item.zone === 'pantry') {
-            clonePantry= {
-                pantry : [...]
-            }
+        const zona = actions[i].item.zone;
+
+        // console.log(zona);
+
+        if (!clonePantry[zona]) {
+            clonePantry[zona] = [];
+            // console.log(clonePantry[zona]);
         }
+        clonePantry[zona].push(actions[i]);
+        console.log(clonePantry[zona]);
     }
+    //    console.log(clonePantry);
+    return clonePantry;
 }
 
-groupByZone(actions);
+function clonePantry(pantry) {
+    //que es pantry
+    // console.log(typeof pantry);
+    // console.log('raw data');
+    // console.log(parseShipment(rawData));
+    // console.log('actions');
+    // console.log(groupByZone(actions));
+    // console.log('planResrock');
+    // console.log(planRestock(pantry, shipment));
+    const newArray = structuredClone(pantry);
+    return newArray;
+}
+
+clonePantry(pantry);
+
+const shipmentParsed = parseShipment(rawData);
+const restockActions = planRestock(pantry, shipmentParsed);
+const finalGrouped = groupByZone(restockActions);
+
+console.log(finalGrouped);
+
 /*
 11. Debes definir una función llamada groupByZone que acepte un parámetro llamado actions.
 Fallido:12. Tu función groupByZone debe devolver las acciones agrupadas por la propiedad zone de cada objeto.
