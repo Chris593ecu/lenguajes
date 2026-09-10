@@ -47,17 +47,18 @@ function parseShipment(rawData) {
             shipment.push(myObject);
         }
     }
-    // console.log(response);
+    // console.log(shipment);
 
     return shipment;
 }
 
 parseShipment(rawData);
 
+const actions = [];
 function planRestock(pantry, shipment) {
-    const actions = [];
     for (let i = 0; i < shipment.length; i++) {
         const item = shipment[i];
+        console.log(item);
         if (item.qty <= 0) {
             actions.push({
                 type: 'discard',
@@ -83,6 +84,36 @@ function planRestock(pantry, shipment) {
 }
 
 planRestock(pantry, shipment);
+console.log(planRestock(pantry, shipment));
+console.log(shipment[1].zone);
+
+console.log(actions);
+function groupByZone(actions) {
+    const clonePantry = [];
+    /** forma del objeto resultado:
+     * @key 'nombre de la zona
+     * @value Array(actions) que pertenecen a la zona
+     */
+    for (let i = 0; i < actions.length; i++) {
+        console.log(actions[i].item.zone);
+        if (actions[i].item.zone === 'fridge') {
+            clonePantry.push( {
+                item.fridge : [...],
+            })
+        } else if (actions[i].item.zone === 'pantry') {
+            clonePantry= {
+                pantry : [...]
+            }
+        }
+    }
+}
+
+groupByZone(actions);
+/*
+11. Debes definir una función llamada groupByZone que acepte un parámetro llamado actions.
+Fallido:12. Tu función groupByZone debe devolver las acciones agrupadas por la propiedad zone de cada objeto.
+Fallido:13. Tu función groupByZone debe agrupar correctamente las acciones con el contenido y la cantidad correctos.
+*/
 
 console.log('script para Pichincha miles');
 /*
