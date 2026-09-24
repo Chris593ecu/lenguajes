@@ -18,3 +18,14 @@ function largestOfAll(arreglo) {
 }
 
 largestOfAll(myArray);
+
+const arr1 = [1, 2, 3, 46, 8];
+const arr2 = [9, 4, 69, 1, 3];
+//                                  1
+function frankenSplice(arr1, arr2, ind) {
+    const result = arr2.slice();
+    result.splice(ind, 0, ...arr1);
+    result;
+}
+
+frankenSplice([1, 2, 3], [4, 5], 1);
