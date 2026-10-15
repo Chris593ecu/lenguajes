@@ -253,3 +253,19 @@ function assembleStory(arr) {
 
 console.log(assembleStory(filledFragments));
 */
+let str = 'hola JavaScript';
+function titleCase(str) {
+    const strLower = str.toLowerCase();
+
+    console.log(strLower);
+
+    const result = strLower.replace(/(^|\s)\w/g, (letter) =>
+        letter.toUpperCase()
+    );
+
+    console.log(result);
+    return result;
+}
+titleCase(str);
+
+titleCase("I'm A Little Tea Pot");
