@@ -65,7 +65,14 @@ const pares = {
 
 return str.toUpperCase()
           .split('')
-          .map(base => [base, pares[base]])
-
+          .map(base => [base, pares[base]]);
+          // cuando evalua 'A':
+          // map(A => [A, pares[A]]);
+          // entonces map examina A y guarda el arr [A, y el valor de pares[A] que es T]
 }
 */
+
+const numeros = [1, 2, 3, 4];
+
+const dobles = numeros.map((num) => num * 2);
+console.log(dobles);
