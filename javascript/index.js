@@ -125,14 +125,33 @@ function normalizeDirectory(rawData) {
         };
 
         for (let j = 0; j < departmentData.programs.length; j++) {
-            let program = departmentData.programs[j];
-            console.log(program.id);
+            const program = departmentData.programs[j];
 
-            programsById = {
-                id: program.id
+            programsById[program.id] = {
+                ...program,
+                departmentId: departmentId,
             };
+            departmentsById[departmentId].programIds.push(program.id);
+            for (let k = 0; k < program.instructors.length; k++) {
+                const instructor = program.instructors[k];
+                instructorsById[instructor.id] = {
+                    ...instructor,
+                    programId: program.id,
+                    departmentId: departmentId,
+                };
+                if (instructor.email) {
+                    instructorsByEmail[instructor.email] = instructor.id;
+                }
+            }
         }
     }
+
+    return {
+        departmentsById,
+        programsById,
+        instructorsById,
+        instructorsByEmail,
+    };
 }
 
 normalizeDirectory(rawData);
