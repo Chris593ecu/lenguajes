@@ -1,157 +1,25 @@
-//vamos a construir un normalizador de directorios del campus
-const rawData = {
-    'Computer Science': {
-        Dept_code: 'CSE',
-        programs: [
-            {
-                id: 'CSE101',
-                name: 'Database Management System',
-                room: '405',
-                instructors: [
-                    {
-                        id: 'INS001',
-                        name: 'Alejandro',
-                        email: 'alejandro@example.com',
-                        officeHours: 'Sun-Tue 10AM-12PM',
-                    },
-                    { id: 'INS002', name: 'Kenji', officeHours: null },
-                ],
-            },
-            {
-                id: 'CSE102',
-                name: 'Data Structures',
-                room: null,
-                instructors: [
-                    {
-                        id: 'INS003',
-                        name: 'Fatima',
-                        email: 'fatima@example.com',
-                        officeHours: 'Mon-Wed 10AM-2PM',
-                    },
-                ],
-            },
-            {
-                id: 'CSE103',
-                name: 'Operating Systems',
-                room: '401',
-                instructors: [
-                    {
-                        id: 'INS005',
-                        name: 'Wei',
-                        email: 'wei@example.com',
-                        officeHours: 'Thu 1PM-3PM',
-                    },
-                ],
-            },
-        ],
-    },
-    'Business Administration': {
-        Dept_code: 'BBA',
-        programs: [
-            {
-                id: 'BBA101',
-                name: 'Financial Accounting',
-                room: '201',
-                instructors: [
-                    { id: 'INS004', name: 'Sofia', email: 'sofia@example.com' },
-                ],
-            },
-            {
-                id: 'BBA102',
-                name: 'Marketing Management',
-                room: '204',
-                instructors: [
-                    {
-                        id: 'INS006',
-                        name: 'Robin',
-                        email: 'robin@example.com',
-                        officeHours: 'Tue-Thu 9AM-11AM',
-                    },
-                ],
-            },
-            {
-                id: 'BBA103',
-                name: 'Business Law',
-                room: '203',
-                instructors: [
-                    {
-                        id: 'INS007',
-                        name: 'Priya',
-                        email: 'priya@example.com',
-                        officeHours: 'Mon 2PM-4PM',
-                    },
-                ],
-            },
-        ],
-    },
-};
-console.log(rawData['Computer Science'].programs[0].instructors[0].email);
-function getInstructorByEmail(email) {
-    for (const dept in rawData) {
-        const programs = rawData[dept].programs;
+// mesclar lista de reproducción
 
-        for (const program of programs) {
-            for (const instructor of program['instructors']) {
-                if (instructor.email === email) {
-                    return instructor.name;
-                }
-            }
+// función que omite elementos den un array
+
+const arr = [1, 1, 1, 2, 1, 1, 1];
+
+function dropElements(arr, func) {
+    const result = [];
+    for (let i = 0; i < arr.length; i++) {
+        let n = arr[i];
+        console.log(i);
+
+        if (func) {
+            result.push(arr[i]);
         }
     }
-    return null;
+    console.log(result);
+    return result;
 }
 
-console.log(getInstructorByEmail('fatima@example.com'));
-getInstructorByEmail('robin@example.com');
-
-function normalizeDirectory(rawData) {
-    const departmentsById = {};
-    const programsById = {};
-    const instructorsById = {};
-    const instructorsByEmail = {};
-
-    const departmentEntries = Object.entries(rawData);
-
-    for (let i = 0; i < departmentEntries.length; i++) {
-        const [departmentName, departmentData] = departmentEntries[i];
-
-        const departmentId = departmentData.Dept_code || `dept-${i + 1}`;
-
-        departmentsById[departmentId] = {
-            id: departmentId,
-            code: departmentData.Dept_code,
-            name: departmentName,
-            programIds: [],
-        };
-
-        for (let j = 0; j < departmentData.programs.length; j++) {
-            const program = departmentData.programs[j];
-
-            programsById[program.id] = {
-                ...program,
-                departmentId: departmentId,
-            };
-            departmentsById[departmentId].programIds.push(program.id);
-            for (let k = 0; k < program.instructors.length; k++) {
-                const instructor = program.instructors[k];
-                instructorsById[instructor.id] = {
-                    ...instructor,
-                    programId: program.id,
-                    departmentId: departmentId,
-                };
-                if (instructor.email) {
-                    instructorsByEmail[instructor.email] = instructor.id;
-                }
-            }
-        }
-    }
-
-    return {
-        departmentsById,
-        programsById,
-        instructorsById,
-        instructorsByEmail,
-    };
-}
-
-normalizeDirectory(rawData);
+console.log(
+    dropElements([1, 2, 3, 4], function (n) {
+        return n >= 3;
+    }),
+);
