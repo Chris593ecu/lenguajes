@@ -95,3 +95,12 @@ console.log(hasAllEvenNumbers);
 const hasSomeEvenNumbers = numbers.some((num) => num % 2 === 0);
 
 console.log(hasSomeEvenNumbers);
+
+//ejercicio de buscador de índices ordenados:
+
+function getIndexToIns(arr, numb) {
+    //siempre realizar una copia del array original
+    const arrOrd = [...arr, numb].sort((a, b) => a - b);
+
+    return arrOrd.findIndex((x) => numb === x);
+}
