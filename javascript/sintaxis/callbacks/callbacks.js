@@ -49,7 +49,7 @@ const numbers = [1, 5, 8, 6, 4, 12];
 
 const sum = numbers.reduce(
     (acumulador, valorActual) => acumulador + valorActual,
-    0
+    0,
 );
 
 console.log(sum);
@@ -116,4 +116,15 @@ function diffArray(arr1, arr2) {
 
     // 3. Unimos ambos resultados manteniendo el orden original de cada uno
     return [...soloEnArr1, ...soloEnArr2];
+}
+
+// objetos coincidentes:
+
+function whatIsInAName(collection, source) {
+    const sourceKey = Object.keys(source);
+    console.log(sourceKey);
+
+    return collection.filter((obj) => {
+        return sourceKey.every((key) => obj[key] === source[key]);
+    });
 }
