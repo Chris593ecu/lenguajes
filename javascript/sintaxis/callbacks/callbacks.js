@@ -104,3 +104,16 @@ function getIndexToIns(arr, numb) {
 
     return arrOrd.findIndex((x) => numb === x);
 }
+
+// ejercicio con filter
+
+function diffArray(arr1, arr2) {
+    // 1. Elementos que están en arr1 pero NO en arr2
+    const soloEnArr1 = arr1.filter((item) => !arr2.includes(item));
+
+    // 2. Elementos que están en arr2 pero NO en arr1
+    const soloEnArr2 = arr2.filter((item) => !arr1.includes(item));
+
+    // 3. Unimos ambos resultados manteniendo el orden original de cada uno
+    return [...soloEnArr1, ...soloEnArr2];
+}
