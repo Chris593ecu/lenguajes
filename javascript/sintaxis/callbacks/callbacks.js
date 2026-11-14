@@ -147,3 +147,29 @@ function smallestCommons(arr) {
 console.log(smallestCommons([1, 5]));
 
 console.log(smallestCommons([5, 1]));
+
+//aplanar array
+
+const myArray = [1, [2], { name: 'chrisDev' }, [5, [3]]];
+
+console.log(myArray.flat());
+
+// function steamrollArray(arr) {
+//     return arr.flat();
+// }
+
+function steamrollArray(arr) {
+    const result = [];
+
+    function aplanar(element) {
+        for (let item of element) {
+            if (Array.isArray(item)) {
+                aplanar(item);
+            } else {
+                result.push(item);
+            }
+        }
+    }
+    aplanar(arr);
+    return result;
+}
