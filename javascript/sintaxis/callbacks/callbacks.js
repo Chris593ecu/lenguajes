@@ -49,7 +49,7 @@ const numbers = [1, 5, 8, 6, 4, 12];
 
 const sum = numbers.reduce(
     (acumulador, valorActual) => acumulador + valorActual,
-    0,
+    0
 );
 
 console.log(sum);
@@ -140,7 +140,7 @@ function smallestCommons(arr) {
 
     return Array.from(
         { length: max - min + 1 },
-        (_, index) => min + index,
+        (_, index) => min + index
     ).reduce((acc, curr) => mcm(acc, curr));
 }
 
@@ -173,3 +173,22 @@ function steamrollArray(arr) {
     aplanar(arr);
     return result;
 }
+
+// verificar si todos los elementos de un array son verdaderos .every()
+
+function truthCheck(collection, pre) {
+    const preResult = collection.map((x) => x[pre]);
+
+    return preResult.every((valor) => Boolean(valor));
+}
+
+console.log(
+    truthCheck(
+        [
+            { name: 'Quincy', role: 'Founder', isBot: false },
+            { name: 'Naomi', role: '', isBot: false },
+            { name: 'Camperbot', role: 'Bot', isBot: true },
+        ],
+        'isBot'
+    )
+);
